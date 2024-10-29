@@ -1,0 +1,18 @@
+name: pytorch3d_env
+channels:
+  - pytorch
+  - nvidia/label/cuda-11.6.1
+  - iopath
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.6
+  - cuda-toolkit
+  - iopath
+  - pip
+  - pip:
+      - pytorch3d
+
