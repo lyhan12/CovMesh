@@ -60,5 +60,6 @@ ae9532af8fd548fea3e6b5b62d57a518_hallway_7 2869db404dd24a5e9a0ddd2e619fd224_hall
 ```
 
 **heatmap.png**
+
 ![image](assets/heatmap.png)
 
