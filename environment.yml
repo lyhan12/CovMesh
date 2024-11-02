@@ -1,7 +1,7 @@
-name: pytorch3d_env
+name: cov_mesh 
 channels:
   - pytorch
-  - nvidia/label/cuda-11.6.1
+  # - nvidia/label/cuda-11.6.1
   - iopath
   - conda-forge
   - defaults
@@ -9,7 +9,7 @@ dependencies:
   - python=3.9
   - pytorch
   - torchvision
-  - pytorch-cuda=11.6
+  # - pytorch-cuda=11.6
   - cuda-toolkit
   - iopath
   - pip

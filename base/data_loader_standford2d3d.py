@@ -14,6 +14,7 @@ class Stanford2D3DDataLoader:
         """Initialize the data loader with the root directory."""
         self.root_dir = root_dir
         self.viewpoints = []
+        self.skipped_view_ids = []
         
 
     def get_viewpoints(self):
@@ -42,6 +43,8 @@ class Stanford2D3DDataLoader:
             viewpoint = self._generate_viewpoint_data(view_id)
             if not viewpoint is None:
                 self.viewpoints.append(viewpoint)
+            else:
+                self.skipped_view_ids.append(view_id)
 
 
     def num_viewpoints(self):
@@ -50,19 +53,27 @@ class Stanford2D3DDataLoader:
     def _generate_viewpoint_data(self, view_id) -> Optional[ViewpointData]:
         frames = []
 
-        has_all_frames = True
-        for i in range(0, 64):
-            frame_id = f"{view_id}_frame_{str(i)}"
+        # has_all_frames = True
+        # for i in range(0, 100):
+        #     frame_id = f"{view_id}_frame_{str(i)}"
 
-            frame_data = self._generate_frame_data(frame_id)
-            frames.append(frame_data)
-            if frame_data is None:
-                has_all_frames = False
+        #     frame_data = self._generate_frame_data(frame_id)
+        #     if frame_data is None:
+        #         break
 
-        if not has_all_frames:
-            return None
+        #     frames.append(frame_data)
 
-        return ViewpointData(view_id=view_id, frames=frames)
+        # if len(frames) == 0:
+        #     print(f"Skipped view_id {view_id} as no frames were found.")
+        #     return None
+
+        rgb_name = "camera_" + view_id + "_frame_equirectangular_domain_rgb.png"
+        rgb_path = os.path.join(self.root_dir, "pano", "rgb", rgb_name)
+
+        pose_name = "camera_" + view_id + "_frame_equirectangular_domain_pose.json"
+        pose_path = os.path.join(self.root_dir, "pano", "pose", pose_name)
+
+        return ViewpointData(view_id=view_id, frames=frames, rgb_path=rgb_path, pose_path=pose_path)
 
 
     def _generate_frame_data(self, frame_id):
