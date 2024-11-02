@@ -332,8 +332,10 @@ def main(args):
         pairs_file = os.path.join(output_dir, f"pairs_{num_nn}.txt")
         with open(pairs_file, "w") as file:
             for ref_view_id, nn_view_id, nn_score, nn_k in pairs_info:
+                ref_rgb_path = os.path.join(data_dir, "pano", "rgb", f"camera_{ref_view_id}_frame_equirectangular_domain_rgb.png")
+                qry_rgb_path = os.path.join(data_dir, "pano", "rgb", f"camera_{nn_view_id}_frame_equirectangular_domain_rgb.png")
                 if nn_k <= num_nn and nn_score > corr_thres:
-                    file.write(f"{ref_view_id} {nn_view_id} {nn_score:.4f} {nn_k}\n")    
+                    file.write(f"{ref_rgb_path} {qry_rgb_path}\n")    
 
     skipped_view_ids_file = os.path.join(output_dir, "skipped_view_ids.txt")
     for skipped_view_id in data_loader.skipped_view_ids:
